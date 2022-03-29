@@ -2,7 +2,7 @@ use std::io::Write;
 use std::str::FromStr;
 
 fn main() {
-    let mut numbers = Vec::new()
+    let mut numbers = Vec::new();
 
     for arg in std::env::args().skip(1) {
         numbers.push(u64::from_str(&arg).expect("error parsing argument"));
@@ -29,7 +29,7 @@ fn gcd(mut n: u64, mut m: u64) -> u64 {
             m = n;
             n = t;
         }
-        m = % n;
+        m = m % n;
     }
     n
 }
