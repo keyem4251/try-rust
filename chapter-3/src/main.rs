@@ -1,6 +1,3 @@
-use std::intrinsics::size_of;
-use std::mem::swap;
-
 fn main() {
     println!("build_vector: {:?}", build_vector());
     println!("int_wrap: {}", int_wrap());
@@ -9,6 +6,7 @@ fn main() {
     println!("bool_: {:?}", bool_());
     println!("char_: {:?}", char_());
     println!("tuple_: {:?}", tuple_());
+    println!("pointer_: {:?}", pointer_());
 }
 
 fn build_vector() -> Vec<i16> {
@@ -67,5 +65,13 @@ fn tuple_() {
     let (head, tail) = text.split_at(21);
     assert_eq!(head, "I see the eigenvalue ");
     assert_eq!(tail, "in thine eye");
-    assert_eq!(, ());
+}
+
+fn pointer_() {
+    let text = 1;
+    let a = &text;
+    println!("{}", *a);
+    println!("{}", text);
+    let t = (12, "eggs");
+    let _b = Box::new(t); // allocate a tuple in the heap
 }
