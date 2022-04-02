@@ -1,10 +1,14 @@
+use std::intrinsics::size_of;
+use std::mem::swap;
+
 fn main() {
     println!("build_vector: {:?}", build_vector());
     println!("int_wrap: {}", int_wrap());
     println!("cast_int: {:?}", cast_int());
     println!("float_: {:?}", float_());
     println!("bool_: {:?}", bool_());
-    println!("char__: {:?}", char_());
+    println!("char_: {:?}", char_());
+    println!("tuple_: {:?}", tuple_());
 }
 
 fn build_vector() -> Vec<i16> {
@@ -56,4 +60,12 @@ fn char_() {
     assert_eq!('*'.is_alphabetic(), false);
     assert_eq!('β'.is_alphabetic(), true);
     assert_eq!('6'.is_digit(10), true);
+}
+
+fn tuple_() {
+    let text = "I see the eigenvalue in thine eye";
+    let (head, tail) = text.split_at(21);
+    assert_eq!(head, "I see the eigenvalue ");
+    assert_eq!(tail, "in thine eye");
+    assert_eq!(, ());
 }
