@@ -1,7 +1,8 @@
 fn main() {
-    println!("{:?}", build_vector());
-    println!("{}", int_wrap());
-    println!("{:?}", cast_int());
+    println!("build_vector: {:?}", build_vector());
+    println!("int_wrap: {}", int_wrap());
+    println!("cast_int: {:?}", cast_int());
+    println!("float_: {:?}", float_());
 }
 
 fn build_vector() -> Vec<i16> {
@@ -33,4 +34,12 @@ fn cast_int() {
     assert_eq!(2u16.pow(4), 16); // 2の4乗
     assert_eq!((-4i32).abs(), 4); // 絶対値
     assert_eq!(0b101101u8.count_ones(), 4)
+}
+
+fn float_() -> f64 {
+    assert_eq!(5f32.sqrt() * 5f32.sqrt(), 5.);
+    assert_eq!((-1.01f64).floor(), -2.0);
+    assert!((-1. / f32::INFINITY).is_sign_negative());
+
+    (2.0_f64).sqrt()
 }
