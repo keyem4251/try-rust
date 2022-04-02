@@ -3,6 +3,8 @@ fn main() {
     println!("int_wrap: {}", int_wrap());
     println!("cast_int: {:?}", cast_int());
     println!("float_: {:?}", float_());
+    println!("bool_: {:?}", bool_());
+    println!("char__: {:?}", char_());
 }
 
 fn build_vector() -> Vec<i16> {
@@ -47,4 +49,11 @@ fn float_() -> f64 {
 fn bool_() {
     assert_eq!(false as i32, 0);
     assert_eq!(true as i32, 1);
+}
+
+fn char_() {
+    assert_eq!('*' as i32, 42);
+    assert_eq!('*'.is_alphabetic(), false);
+    assert_eq!('β'.is_alphabetic(), true);
+    assert_eq!('6'.is_digit(10), true);
 }
