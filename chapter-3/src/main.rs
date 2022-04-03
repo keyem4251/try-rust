@@ -189,6 +189,7 @@ fn list_vector_slice_() {
 }
 
 fn string_() {
+    // string char
     let _speech = "\"Ouch!\" said the well.\n";
     println!("In the room the women come and go, Singing of Mount Abora");
     println!("It was a bright, cold day in April, and \
@@ -200,5 +201,29 @@ fn string_() {
         This raw string started with 'r###'.
         Therefore it does not end until we reach a quote mark ('"')
         followed immediately by three pound signs ('###'):
-    "###)
+    "###);
+
+    // string byte
+    let method = b"GET";
+    assert_eq!(method, &[b'G', b'E', b'T']);
+
+    // memory string
+    let noodles = "noodles".to_string();
+    let _oodles = &noodles[1..];
+    let poodles = "ß_ß";
+    assert_eq!(poodles.len(), 5);
+    assert_eq!(poodles.chars().count(), 3);
+
+    let _error_message = "too many pets.".to_string();
+    assert_eq!(format!("{} {:02}' {:02} N", 24, 5, 23), "24 05' 23 N".to_string());
+    let bits = vec!["veni", "vidi", "vici"];
+    assert_eq!(bits.concat(), "venividivici");
+    assert_eq!(bits.join(", "), "veni, vidi, vici");
+
+    assert_eq!("ONE".to_lowercase(), "one");
+    assert!("peanut".contains("nut"));
+    assert_eq!("∂_∂".replace("∂", "+"), "+_+");
+    for word in "veni, vidi, vici".split(", ") {
+        assert!(word.starts_with("v"));
+    }
 }
