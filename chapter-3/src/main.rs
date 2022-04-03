@@ -109,4 +109,60 @@ fn list_vector_slice_() {
     v.push(11);
     v.push(13);
     assert_eq!(v.iter().fold(1, |a, b| a * b), 30030);
+
+    fn _new_pixel_buffer(rows: usize, cols: usize) -> Vec<u8> {
+        vec![0; rows * cols]
+    }
+
+    let mut v2 = Vec::new();
+    v2.push("step");
+    v2.push("on");
+    v2.push("no");
+    v2.push("pets");
+    assert_eq!(v2, vec!["step", "on", "no", "pets"]);
+
+    let v3: Vec<i32> = (0..5).collect();
+    assert_eq!(v3, [0, 1, 2, 3, 4]);
+
+    let mut v4 = vec!["a man", "a plan", "a canal", "panama"];
+    v4.reverse();
+    assert_eq!(v4, vec!["panama", "a canal", "a plan", "a man"]);
+
+    let mut v5 = Vec::with_capacity(2);
+    assert_eq!(v5.len(), 0);
+    assert_eq!(v5.capacity(), 2);
+
+    v5.push(1);
+    v5.push(2);
+    assert_eq!(v.len(), 2);
+    assert_eq!(v.capacity(), 2);
+
+    v5.push(3);
+    assert_eq!(v5.len(), 3);
+    assert_eq!(v5.capacity(), 4);
+
+    let mut v6 = vec![10, 20, 30, 40, 50];
+    v6.insert(3, 35);
+    assert_eq!(v6, [10, 20, 30, 35, 40, 50]);
+
+    v6.remove(1);
+    assert_eq!(v6, [10, 30, 35, 40, 50]);
+
+    let mut v7 = vec!["carmen", "miranda"];
+    assert_eq!(v7.pop(), Some("miranda"));
+    assert_eq!(v7.pop(), Some("carmen"));
+    assert_eq!(v7.pop(), None);
+
+    let languages: Vec<String> = std::env::args().skip(1).collect();
+    for language in languages {
+        println!(
+            "{}: {}",
+            language,
+            if language.len() % 2 == 0 {
+                "functional"
+            } else {
+                "imperative"
+            }
+        );
+    }
 }
