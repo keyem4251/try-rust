@@ -134,8 +134,8 @@ fn list_vector_slice_() {
 
     v5.push(1);
     v5.push(2);
-    assert_eq!(v.len(), 2);
-    assert_eq!(v.capacity(), 2);
+    assert_eq!(v5.len(), 2);
+    assert_eq!(v5.capacity(), 2);
 
     v5.push(3);
     assert_eq!(v5.len(), 3);
@@ -153,16 +153,34 @@ fn list_vector_slice_() {
     assert_eq!(v7.pop(), Some("carmen"));
     assert_eq!(v7.pop(), None);
 
-    let languages: Vec<String> = std::env::args().skip(1).collect();
-    for language in languages {
-        println!(
-            "{}: {}",
-            language,
-            if language.len() % 2 == 0 {
-                "functional"
-            } else {
-                "imperative"
-            }
-        );
+    // let languages: Vec<String> = std::env::args().skip(1).collect();
+    // for language in languages {
+    //     println!(
+    //         "{}: {}",
+    //         language,
+    //         if language.len() % 2 == 0 {
+    //             "functional"
+    //         } else {
+    //             "imperative"
+    //         }
+    //     );
+    // }
+
+    // slice
+    let v8: Vec<f64> = vec![0.0, 0.707, 1.0, 0.707];
+    let a: [f64; 4] = [0.0, -0.707, -1.0, -0.707];
+
+    let _sv: &[f64] = &v8;
+    let sa: &[f64] = &a;
+
+    fn print(n: &[f64]) {
+        for elt in n {
+            println!("{}", elt);
+        }
     }
+    print(&v8);
+    print(&a);
+    print(&v8[0..2]);
+    print(&a[2..]);
+    print(&sa[1..3]);
 }
