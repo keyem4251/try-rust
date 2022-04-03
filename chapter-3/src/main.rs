@@ -1,3 +1,5 @@
+use regex::Regex;
+
 fn main() {
     println!("build_vector: {:?}", build_vector());
     println!("int_wrap: {}", int_wrap());
@@ -8,6 +10,7 @@ fn main() {
     println!("tuple_: {:?}", tuple_());
     println!("pointer_: {:?}", pointer_());
     println!("list_vector_slice_: {:?}", list_vector_slice_());
+    println!("string_: {:?}", string_());
 }
 
 fn build_vector() -> Vec<i16> {
@@ -183,4 +186,19 @@ fn list_vector_slice_() {
     print(&v8[0..2]);
     print(&a[2..]);
     print(&sa[1..3]);
+}
+
+fn string_() {
+    let _speech = "\"Ouch!\" said the well.\n";
+    println!("In the room the women come and go, Singing of Mount Abora");
+    println!("It was a bright, cold day in April, and \
+        there were four of us-\
+        more or less.");
+    let _default_win_install_path = r"C:\Program Files\Gorillas";
+    let _pattern = Regex::new(r"\d+(\.\d+)*");
+    println!(r###"
+        This raw string started with 'r###'.
+        Therefore it does not end until we reach a quote mark ('"')
+        followed immediately by three pound signs ('###'):
+    "###)
 }
