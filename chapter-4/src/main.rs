@@ -75,8 +75,23 @@ fn main() {
     composers2.push(Person2 { name: Some("Palestrine".to_string() ), birth: 1525 });
     // let first_name = std::mem::replace(&mut composers2[0].name, None);
     let first_name = composers2[0].name.take();
-    assert_eq!(first_name, "Palestrine".to_string());
+    assert_eq!(first_name, Some("Palestrine".to_string()));
     assert_eq!(composers2[0].name, None);
+
+    let str1 = "somnambulance".to_string();
+    let _str2 = str1;
+    // println!("{}", str1); error
+
+    let num1 = 10;
+    let _num2 = num1;
+    println!("{}", num1);
+
+    #[derive(Copy, Clone)]
+    struct Label { number: u32 }
+    fn print(l: Label) { println!("STAMP: {}", l.number) }
+    let l = Label { number: 3 };
+    print(l);
+    println!("My label number is: {}", l.number);
 }
 
 fn print_padovan() {
