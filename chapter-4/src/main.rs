@@ -35,12 +35,48 @@ fn main() {
     }
     // h(x); x is uninitialized here if either path use it
 
-    let mut y = vec![10, 20, 30];
-    while x.len() > 2 {
-        // g(x); this only x would be moved in first iteration, uninitialized in second
-        g(y); // move from y
-        y = i(); // give y a fresh value
+    let mut _y = vec![10, 20, 30];
+    // while x.len() > 2 {
+    //     // g(x); this only x would be moved in first iteration, uninitialized in second
+    //     g(y); // move from y
+    //     y = i(); // give y a fresh value
+    // }
+
+    // Build a vector of the strings "101", "102", ... "105"
+    let mut v2 = Vec::new();
+    for i in 101..106 {
+        v2.push(i.to_string());
     }
+    // 1. Pop a value off the end of the vector
+    let fifth = v2.pop().unwrap();
+    assert_eq!(fifth, "105");
+
+    // 2. Move  a value out of the middle of the vector, and move the last element into its spot
+    let second = v2.swap_remove(1);
+    assert_eq!(second, "102");
+    println!("{:?}", v2);
+
+    // 3. Swap in another value for the one we're taking out
+    let third = std::mem::replace(&mut v2[2], "substitute".to_string());
+    assert_eq!(third, "103");
+
+    assert_eq!(v2, vec!["101", "104", "substitute"]);
+
+    let v3 = vec!["liberte".to_string(), "egalite".to_string(), "fraternite".to_string()];
+    for mut s in v3 {
+        s.push('!');
+        println!("{}", s);
+        // println!("{:?}", v3); value borrowed here after move error
+    }
+    // println!("{:?}", v3); value borrowed here after move error
+
+    struct Person2 { name: Option<String>, birth: i32 }
+    let mut composers2 = Vec::new();
+    composers2.push(Person2 { name: Some("Palestrine".to_string() ), birth: 1525 });
+    // let first_name = std::mem::replace(&mut composers2[0].name, None);
+    let first_name = composers2[0].name.take();
+    assert_eq!(first_name, "Palestrine".to_string());
+    assert_eq!(composers2[0].name, None);
 }
 
 fn print_padovan() {
@@ -53,18 +89,18 @@ fn print_padovan() {
 }
 
 fn f(x: Vec<i32>) {
-    println!(x);
+    println!("{:?}", x);
 }
 
 fn g(x: Vec<i32>) {
-    println!(x);
+    println!("{:?}", x);
 }
 
-fn h(x: Vec<i32>) -> Vec<i32>{
-    println!(x);
+fn _h(x: Vec<i32>) -> Vec<i32>{
+    println!("{:?}", x);
     x
 }
 
-fn i() -> Vec<i32>{
+fn _i() -> Vec<i32>{
     vec![10, 20, 30]
 }
