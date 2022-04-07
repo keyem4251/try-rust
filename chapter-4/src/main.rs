@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 fn main() {
     print_padovan();
 
@@ -92,6 +94,18 @@ fn main() {
     let l = Label { number: 3 };
     print(l);
     println!("My label number is: {}", l.number);
+
+    let a1 = "shirataki".to_string();
+    let mut b1 = a1.clone();
+    let c1 = a1.clone();
+    assert_eq!(b1.find("taki"), Some(5));
+    b1.push_str(" noodles");
+
+    let a = Rc::new("shirataki".to_string());
+    let mut b = a.clone();
+    let c = a.clone();
+    assert_eq!(b.find("taki"), Some(5));
+    // b.push_str(" noodles"); rc is mutable
 }
 
 fn print_padovan() {
