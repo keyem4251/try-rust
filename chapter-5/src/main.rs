@@ -3,6 +3,7 @@ use std::collections::HashMap;
 fn main() {
     value_ref();
     value_ref2();
+    value_ref3();
 }
 
 type Table = HashMap<String, Vec<String>>;
@@ -50,3 +51,48 @@ fn sort_works(table: &mut Table) {
     }
 }
 
+fn value_ref3() {
+    // Back to Rust code from this point onward.
+    let x = 10;
+    let r = &x;
+    assert_eq!(*r, 10);
+
+    let mut y = 32;
+    let m = &mut y;
+    *m += 32;
+    assert_eq!(*m, 64);
+    assert_eq!(y, 64);
+
+    struct Anime { name: &'static str, _bechdel_pass: bool }
+    let aria = Anime { name: "Aria: The Animation", _bechdel_pass: true };
+    let anime_ref = &aria;
+    assert_eq!(anime_ref.name, "Aria: The Animation");
+
+    // Equivalent to the above, but with the dereference written out:
+    assert_eq!((*anime_ref).name, "Aria: The Animation");
+
+    let x2 = 10;
+    let y2 = 20;
+    let mut r = &x2;
+
+    if y2 > 10 {
+        r = &y2;
+    }
+    assert!(*r == 10 || *r == 20);
+
+    let rx = &x2;
+    let ry = &y2;
+
+    let rrx = &rx;
+    let rry = &ry;
+
+    assert!(rrx <= rry);
+    assert_eq!(rrx, rry);
+    // assert!(!std::ptr::eq(rx, ry)); compare address and panic
+
+    fn factorial(n: usize) -> usize {
+        (1..n+1).fold(1, |a, b| a * b)
+    }
+    let r = &factorial(6); // create non name variable and equal life time to r
+    assert_eq!(r + &1079, 1729); // &1079 life time is value_ref3
+}
