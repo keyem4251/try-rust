@@ -41,4 +41,12 @@ fn value_ref2() {
     table.insert("Cellini".to_string(), vec!["Perseus with the head of Medusa".to_string(), "a salt cellar".to_string()]);
     show2(&table);
     assert_eq!(table["Gesualdo"][0], "many madrigals");
+    sort_works(&mut table)
 }
+
+fn sort_works(table: &mut Table) {
+    for (_artist, works) in table {
+        works.sort();
+    }
+}
+
