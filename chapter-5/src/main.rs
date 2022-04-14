@@ -4,6 +4,7 @@ fn main() {
     value_ref();
     value_ref2();
     value_ref3();
+    ref_5_2();
 }
 
 type Table = HashMap<String, Vec<String>>;
@@ -95,4 +96,46 @@ fn value_ref3() {
     }
     let r = &factorial(6); // create non name variable and equal life time to r
     assert_eq!(r + &1079, 1729); // &1079 life time is value_ref3
+}
+
+fn ref_5_2() {
+    // borrowed value does not live long enough x
+    // {
+    //     let r;
+    //     {
+    //         let x = 1;
+    //         r = &x;
+    //     }
+    //     assert_eq!(*r, 1);
+    // }
+
+    {
+        let x = 1;
+        {
+            let r = &x;
+            assert_eq!(*r, 1)
+        }
+    }
+
+    fn g(p: &i32) { println!("{:?}", p) }
+    let x = 10;
+    g(&x);
+
+    // fn f(p: &'static i32) { println!("{:?}", p) } error
+    // f(&x);
+
+    fn smallest(v: &[i32]) -> &i32 {
+        let mut s = &v[0];
+        for r in &v[1..] {
+            if *r < *s { s = r; }
+        }
+        s
+    }
+    let s;
+    {
+        let parabola = [9, 3, 18, 3, 2, 9];
+        s = smallest(&parabola);
+        assert_eq!(*s, 0);
+    }
+    // assert_eq!(*s, 0); error
 }
