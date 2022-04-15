@@ -138,4 +138,19 @@ fn ref_5_2() {
         assert_eq!(*s, 0);
     }
     // assert_eq!(*s, 0); error
+
+    // struct S<'a, 'b> {
+    //     x: &'a i32,
+    //     y: &'b i32,
+    // }
+    //
+    // let x = 10;
+    // let r;
+    // {
+    //     let y = 20;
+    //     {
+    //         let s = S { x: &x, y: &y };
+    //         r = s.x;
+    //     }
+    // }
 }
