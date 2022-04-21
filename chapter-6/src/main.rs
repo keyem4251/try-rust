@@ -1,6 +1,7 @@
 fn main() {
     section_6_1();
     section_6_2();
+    section_6_3();
 }
 
 fn section_6_1() {
@@ -13,14 +14,14 @@ fn section_6_1() {
 }
 
 fn section_6_2() {
-    let i = 10;
-    let display_name = match i > 5 {
-        Some(b) => b,
-        None => {
-            let s = 10;
-            s
+    let i = Some(10);
+    fn plus_one(x: Option<i32>) -> Option<i32> {
+        match x {
+            None => None,
+            Some(i) => Some(i + 1),
         }
-    };
+    }
+    plus_one(i);
 
     let msg = {
         let mut dandelion_control = 10;
@@ -33,4 +34,21 @@ fn section_6_2() {
         ;
         a
     };
+}
+
+fn section_6_3() {
+    let name;
+    let a = 10;
+    if a > 2 {
+        name = "a";
+    } else {
+        name = "b";
+    }
+
+    child();
+
+    fn child() {
+        // do not use variable name and a
+        let _b = 10;
+    }
 }
